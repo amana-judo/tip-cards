@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tip 01 – What is the value of context lake?</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f4f4f0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 780px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+
+  /* Header */
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 28px 18px;
+    border-bottom: 1px solid #e8e8e4;
+  }
+
+  .tip-badge {
+    background: #eef2ff;
+    border-radius: 20px;
+    padding: 5px 12px;
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: #6366f1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .card-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+  }
+
+  /* Sections */
+  .section {
+    padding: 22px 28px;
+    border-bottom: 1px solid #e8e8e4;
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 14px;
+  }
+
+  /* Value cards */
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .value-card {
+    border-radius: 12px;
+    padding: 18px 16px;
+  }
+  .value-card.green  { background: #f0f7ee; }
+  .value-card.blue   { background: #eff6ff; }
+  .value-card.purple { background: #f0f0ff; }
+
+  .value-card .vc-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 12px;
+  }
+
+  .value-card .vc-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .value-card.green  .vc-title { color: #16a34a; }
+  .value-card.blue   .vc-title { color: #2563eb; }
+  .value-card.purple .vc-title { color: #7c3aed; }
+
+  .value-card .vc-desc {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .value-card.green  .vc-desc { color: #166534; }
+  .value-card.blue   .vc-desc { color: #1e40af; }
+  .value-card.purple .vc-desc { color: #4c1d95; }
+
+  /* Context types */
+  .context-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .context-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f9f9f7;
+    border: 1px solid #e8e8e4;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #374151;
+  }
+  .context-item svg {
+    flex-shrink: 0;
+    color: #6b7280;
+  }
+
+  /* Footer note */
+  .footer-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f9f9f7;
+    border-left: 3px solid #6366f1;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.5;
+  }
+  .footer-note svg { flex-shrink: 0; color: #6b7280; }
+  .footer-note a {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+  .footer-note a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Header -->
+  <div class="card-header">
+    <div class="tip-badge">TIP 01</div>
+    <h1>What is the value of context lake?</h1>
+  </div>
+
+  <!-- Why it matters -->
+  <div class="section">
+    <div class="section-label">Why it matters</div>
+    <div class="value-grid">
+
+      <!-- Accuracy -->
+      <div class="value-card green">
+        <svg class="vc-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="14" stroke="#16a34a" stroke-width="2"/>
+          <circle cx="16" cy="16" r="8" stroke="#16a34a" stroke-width="2"/>
+          <circle cx="16" cy="16" r="3" fill="#16a34a"/>
+          <line x1="16" y1="2" x2="16" y2="6" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+          <line x1="16" y1="26" x2="16" y2="30" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+          <line x1="2" y1="16" x2="6" y2="16" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+          <line x1="26" y1="16" x2="30" y2="16" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="vc-title">Accuracy</div>
+        <div class="vc-desc">High quality data = fewer AI mistakes</div>
+      </div>
+
+      <!-- Cost efficiency -->
+      <div class="value-card blue">
+        <svg class="vc-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="14" stroke="#2563eb" stroke-width="2"/>
+          <text x="16" y="21" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb" font-family="serif">$</text>
+        </svg>
+        <div class="vc-title">Cost efficiency</div>
+        <div class="vc-desc">Structured source of truth = less reasoning = fewer tokens</div>
+      </div>
+
+      <!-- Governance -->
+      <div class="value-card purple">
+        <svg class="vc-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 3L4 8V16C4 22.627 9.373 28 16 28C22.627 28 28 22.627 28 16V8L16 3Z" stroke="#7c3aed" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M11 16l3.5 3.5L21 12" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="vc-title">Governance</div>
+        <div class="vc-desc">Single source of operations — manage access in complex environments</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- What types of context it holds -->
+  <div class="section">
+    <div class="section-label">What types of context it holds</div>
+    <div class="context-grid">
+
+      <div class="context-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        Business context
+      </div>
+      <div class="context-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.657 4.03 3 9 3s9-1.343 9-3V5"/><path d="M3 12c0 1.657 4.03 3 9 3s9-1.343 9-3"/></svg>
+        Configs &amp; Infra
+      </div>
+
+      <div class="context-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        SDLC data (services, deployments, etc.)
+      </div>
+      <div class="context-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Teams &amp; Ownership
+      </div>
+
+      <div class="context-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg>
+        Business workflows &amp; processes
+      </div>
+      <div class="context-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Docs &amp; Designs
+      </div>
+
+      <div class="context-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Runbooks &amp; Playbooks
+      </div>
+      <div class="context-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        KPIs &amp; Metrics
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer note -->
+  <div class="section">
+    <div class="footer-note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span>A context lake slide has been added to demonstrate this.<a href="#">View AEP additional resources →</a></span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
