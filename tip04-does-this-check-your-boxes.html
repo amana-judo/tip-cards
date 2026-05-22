@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tip 04 – Stop asking "Does it make sense?"</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f4f4f0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 780px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 28px 18px;
+    border-bottom: 1px solid #e8e8e4;
+  }
+
+  .tip-badge {
+    background: #eef2ff;
+    border-radius: 20px;
+    padding: 5px 12px;
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: #6366f1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .card-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+  }
+
+  .section {
+    padding: 22px 28px;
+    border-bottom: 1px solid #e8e8e4;
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 14px;
+  }
+
+  .content-block {
+    font-size: 14.5px;
+    color: #374151;
+    line-height: 1.65;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ── Panels ── */
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .compare-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e8e8e4;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .compare-card.dont { border-color: #fecaca; }
+  .compare-card.do   { border-color: #bbf7d0; }
+
+  .compare-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .dont .compare-label { background: #fef2f2; color: #dc2626; border-bottom: 1px solid #fecaca; }
+  .do   .compare-label { background: #f0fdf4; color: #16a34a; border-bottom: 1px solid #bbf7d0; }
+
+  .compare-body {
+    padding: 20px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+  }
+  .dont .compare-body { background: #fffcfc; }
+  .do   .compare-body { background: #fafffe; }
+
+  /* ── Face ── */
+  .face-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .face-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .face-name {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+
+  /* ── Speech bubble ── */
+  .speech {
+    border-radius: 10px;
+    padding: 9px 13px;
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    width: 100%;
+  }
+  .dont .speech.ask    { background: #eef2ff; color: #3730a3; }
+  .do   .speech.ask    { background: #eef2ff; color: #3730a3; }
+  .dont .speech.reply  { background: #fee2e2; color: #991b1b; }
+  .do   .speech.reply  { background: #dcfce7; color: #14532d; }
+  .speech em { font-style: italic; opacity: 0.75; }
+
+  /* ── Outcome ── */
+  .outcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.45;
+    width: 100%;
+    text-align: center;
+  }
+  .dont .outcome { background: #fee2e2; color: #7f1d1d; }
+  .do   .outcome { background: #dcfce7; color: #14532d; }
+  .outcome svg { flex-shrink: 0; }
+
+  /* ── Insight ── */
+  .insight-box {
+    background: #f0f4ff;
+    border-radius: 10px;
+    border-left: 3px solid #6366f1;
+    padding: 16px 18px;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.65;
+  }
+  .insight-box em     { font-style: italic; color: #4338ca; }
+  .insight-box strong { font-weight: 600; color: #1a1a1a; }
+
+  /* ── Takeaway ── */
+  .takeaway {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.6;
+  }
+  .takeaway svg    { flex-shrink: 0; margin-top: 2px; color: #6366f1; }
+  .takeaway .line1 { display: block; margin-bottom: 4px; }
+  .takeaway .line2 {
+    display: block;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Header -->
+  <div class="card-header">
+    <div class="tip-badge">TIP 04</div>
+    <h1>Stop asking "Does it make sense?"</h1>
+  </div>
+
+  <!-- The problem -->
+  <div class="section">
+    <div class="section-label">The problem</div>
+    <div class="content-block">
+      <p>After you pitch Port or run a demo/cold outreach, don't ask <strong>"Does it make sense?"</strong> — it's a dead-end question.</p>
+      <p>It makes it too easy for the customer to nod and say yes while holding back what they really think. Something can make perfect sense and still not be what they're looking for.</p>
+    </div>
+  </div>
+
+  <!-- The shift -->
+  <div class="section">
+    <div class="section-label">The shift</div>
+    <div class="compare-row">
+
+      <!-- BAD -->
+      <div class="compare-card dont">
+        <div class="compare-label">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Don't ask this
+        </div>
+        <div class="compare-body">
+
+          <div class="face-row">
+            <!-- Rep: neutral/confident -->
+            <div class="face-wrap">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="30" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/>
+                <!-- hair -->
+                <path d="M10 28 Q10 6 32 6 Q54 6 54 28" fill="#1e1b4b"/>
+                <!-- eyes: calm, half-lid -->
+                <ellipse cx="22" cy="30" rx="4" ry="3.5" fill="white"/>
+                <ellipse cx="42" cy="30" rx="4" ry="3.5" fill="white"/>
+                <circle cx="23" cy="31" r="2.2" fill="#1e1b4b"/>
+                <circle cx="43" cy="31" r="2.2" fill="#1e1b4b"/>
+                <circle cx="23.8" cy="30.2" r="0.8" fill="white"/>
+                <circle cx="43.8" cy="30.2" r="0.8" fill="white"/>
+                <!-- neutral-upbeat mouth -->
+                <path d="M24 42 Q32 47 40 42" stroke="#1e1b4b" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+              <span class="face-name">Rep</span>
+            </div>
+
+            <!-- Customer: indifferent / neutral -->
+            <div class="face-wrap">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="30" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="2"/>
+                <!-- hair -->
+                <path d="M10 28 Q10 6 32 6 Q54 6 54 28" fill="#92400e"/>
+                <!-- eyes: half-closed / bored -->
+                <ellipse cx="22" cy="30" rx="4" ry="3" fill="white"/>
+                <ellipse cx="42" cy="30" rx="4" ry="3" fill="white"/>
+                <circle cx="22" cy="31" r="2.2" fill="#374151"/>
+                <circle cx="42" cy="31" r="2.2" fill="#374151"/>
+                <!-- heavy flat lids suggesting disengagement -->
+                <rect x="18" y="27" width="8" height="3.5" rx="1.5" fill="#f3f4f6"/>
+                <rect x="38" y="27" width="8" height="3.5" rx="1.5" fill="#f3f4f6"/>
+                <!-- flat brows, level -->
+                <line x1="18" y1="23" x2="26" y2="23" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="38" y1="23" x2="46" y2="23" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/>
+                <!-- perfectly flat mouth -->
+                <line x1="24" y1="43" x2="40" y2="43" stroke="#374151" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span class="face-name">Customer</span>
+            </div>
+          </div>
+
+          <div class="speech ask">"Does it make sense?"</div>
+          <div class="speech reply">"Yeah… sure." <em>(holds back)</em></div>
+
+          <div class="outcome">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Deal goes quiet. You never find out why.
+          </div>
+        </div>
+      </div>
+
+      <!-- GOOD -->
+      <div class="compare-card do">
+        <div class="compare-label">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Ask this instead
+        </div>
+        <div class="compare-body">
+
+          <div class="face-row">
+            <!-- Rep: engaged, eyebrows raised -->
+            <div class="face-wrap">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="30" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/>
+                <!-- hair -->
+                <path d="M10 26 Q10 6 32 6 Q54 6 54 26" fill="#1e1b4b"/>
+                <!-- raised brows -->
+                <path d="M17 23 Q22 19 27 22" stroke="#1e1b4b" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <path d="M37 22 Q42 19 47 23" stroke="#1e1b4b" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <!-- wide eyes -->
+                <ellipse cx="22" cy="30" rx="4.5" ry="4" fill="white"/>
+                <ellipse cx="42" cy="30" rx="4.5" ry="4" fill="white"/>
+                <circle cx="23" cy="31" r="2.5" fill="#1e1b4b"/>
+                <circle cx="43" cy="31" r="2.5" fill="#1e1b4b"/>
+                <circle cx="23.8" cy="30" r="1" fill="white"/>
+                <circle cx="43.8" cy="30" r="1" fill="white"/>
+                <!-- big warm smile -->
+                <path d="M22 41 Q32 50 42 41" stroke="#1e1b4b" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+              <span class="face-name">Rep</span>
+            </div>
+
+            <!-- Customer: open, surprised-happy -->
+            <div class="face-wrap">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="30" fill="#dcfce7" stroke="#bbf7d0" stroke-width="2"/>
+                <!-- hair -->
+                <path d="M10 26 Q10 6 32 6 Q54 6 54 26" fill="#92400e"/>
+                <!-- relaxed raised brows -->
+                <path d="M18 23 Q22 20 26 22" stroke="#374151" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <path d="M38 22 Q42 20 46 23" stroke="#374151" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <!-- bright wide eyes -->
+                <ellipse cx="22" cy="30" rx="4.5" ry="4.5" fill="white"/>
+                <ellipse cx="42" cy="30" rx="4.5" ry="4.5" fill="white"/>
+                <circle cx="23" cy="31" r="2.8" fill="#374151"/>
+                <circle cx="43" cy="31" r="2.8" fill="#374151"/>
+                <circle cx="24" cy="29.5" r="1.1" fill="white"/>
+                <circle cx="44" cy="29.5" r="1.1" fill="white"/>
+                <!-- open, genuine smile -->
+                <path d="M22 41 Q32 51 42 41" stroke="#374151" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <!-- small teeth hint -->
+                <path d="M25 43 Q32 48 39 43" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              </svg>
+              <span class="face-name">Customer</span>
+            </div>
+          </div>
+
+          <div class="speech ask">"Does this check your boxes?"</div>
+          <div class="speech reply">"Yes, but I expected to see X."</div>
+
+          <div class="outcome">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Gap addressed while still on the call.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Why it works -->
+  <div class="section">
+    <div class="section-label">Why it works</div>
+    <div class="insight-box">
+      That one small shift changes the entire dynamic. The answer you'll usually get is: "Yes, but I expected to see X." And that's exactly where you want to be — now you have a chance to address what's missing <em>while you're still on the call</em>, instead of finding out later <strong>why the deal went quiet.</strong>
+    </div>
+  </div>
+
+  <!-- Takeaway -->
+  <div class="section">
+    <div class="takeaway">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <span>
+        <span class="line1">Don't let customers leave politely confused.</span>
+        <span class="line2">Make sure they leave having seen everything they came for.</span>
+      </span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
